@@ -1,0 +1,40 @@
+# 1. Локальная директория Terraform (бинарники провайдеров, модули)
+# В 2026 мы не коммитим провайдеров, так как CI должен выкачивать их из внутреннего зеркала/Registry
+.terraform/
+
+# 2. Файлы состояния (State) - КРИТИЧЕСКИ ВАЖНО
+# Хранение стейта в Git — это автоматический провал секьюрити-ревью
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# 3. Переменные с секретами
+# Мы разрешаем только *.example.tfvars для документации
+*.tfvars
+*.tfvars.json
+!*.example.tfvars
+
+# 4. Логи и отладочная информация
+crash.log
+crash.*.log
+*.log
+
+# 5. Файлы переопределения (Local overrides)
+# Используются для локальных правок, которые не должны попасть в общий флоу
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# 6. Планы (Plan files)
+# Планы могут содержать sensitive data в бинарном виде
+*.tfplan
+
+# 7. Директории инструментов-оберток (Terragrunt / Atmos)
+.terragrunt-cache/
+.atmos/
+
+# 8. Секреты и окружение
+.env
+.env.*
+.vault-token

@@ -2,17 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-terraform {
-  backend "s3" {
-    bucket = "danila-terekhov-cloud-rnd-tf-state-backend" # Имя созданной корзины
-    key    = "global/bootstrap/terraform.tfstate"
-    region = "us-east-1"
-
-    dynamodb_table = "terraform-state-locks" # Имя созданной таблицы
-    encrypt        = true                    # Обязательно для безопасности
-  }
-}
-
 # State Storage: Корзина для стейта
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "danila-terekhov-cloud-rnd-tf-state-backend"
